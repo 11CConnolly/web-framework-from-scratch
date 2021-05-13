@@ -4,7 +4,12 @@ class App
 	end
 
 	def call(env)
-		[200, {}, ["Hello world!"]]
+		request = Rack::Request.new(env)
+		@routes.each do |route|
+			content = route.match(request)
+			return [200, {}, [content]] if content				
+		end
+		awoijf
 	end
 
 	class RouteTable
@@ -17,8 +22,15 @@ class App
 			@routes << Route.new(route_spec, block)
 			p @routes
 		end
+
+		def each(&block)
+			@routes.each(&block)
+		end
 	end
 
 	class Route < Struct.new(:route_spec, :block)
+		def match(request)
+			"ok"
+		end
 	end
 end
