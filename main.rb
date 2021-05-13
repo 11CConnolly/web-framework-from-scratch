@@ -1,7 +1,11 @@
-class App
-	def call(env)
-		[200, {}, ["Hello world!"]]
+require_relative 'framework'
+
+APP = App.new do
+	get '/' do
+		'This is the root'
+	end
+
+	get 'user/:username' do
+		'This is a user'
 	end
 end
-
-APP = App.new
