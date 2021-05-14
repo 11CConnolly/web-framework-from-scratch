@@ -9,7 +9,7 @@ class App
 			content = route.match(request)
 			return [200, {}, [content]] if content				
 		end
-		awoijf
+		return [404, {}, ["Page no found"]]
 	end
 
 	class RouteTable
@@ -30,7 +30,11 @@ class App
 
 	class Route < Struct.new(:route_spec, :block)
 		def match(request)
-			"ok"
+			if request.path == route_spec
+				block.call
+			else
+				nil
+			end
 		end
 	end
 end
