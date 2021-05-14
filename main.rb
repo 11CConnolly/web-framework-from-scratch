@@ -5,7 +5,7 @@ APP = App.new do
 		'This is the root'
 	end
 
-	get 'user/:username' do
-		'This is a user'
+	get '/user/:username' do |params|
+		"This is #{params.fetch('username')}!"
 	end
 end
